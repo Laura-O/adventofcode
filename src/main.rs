@@ -1,21 +1,38 @@
-use std::io::{BufReader};
-use std::io::prelude::*;
-use std::fs::File;
-use std::path::Path;
+use clap::{App, Arg};
 
 mod day01;
+mod day02;
+mod helpers;
 
-fn main() {
-    let data = read_file_to_int("src/day01/input.txt");
-    day01::task1(&data);
-    day01::task2(&data)
-}
+fn main() -> Result<(), String> {
+    let matches = App::new("Advent of Code")
+        .author("Laura")
+        .about("Advent of code solutions")
+        .arg(
+            Arg::with_name("day")
+                .short("d")
+                .takes_value(true)
+                .help(r#"Day number."#),
+        )
+        .get_matches();
 
-
-fn read_file_to_int (path : impl AsRef<Path>) ->  Vec<u32> {
-    let f = File::open(path).expect("File not found");
-    let reader = BufReader::new(f);
-
-    let data : Vec<u32> = reader.lines().map(|l| l.unwrap().parse::<u32>().unwrap()).collect();
-    return data
+    Ok(match matches.value_of("day") {
+        Some("1") => {
+            let data_01 = helpers::read_file_to_int("src/day01/input.txt");
+            println!(
+                "Task 1: {}, Task 2: {}",
+                day01::task1(&data_01),
+                day01::task2(&data_01)
+            );
+        }
+        Some("2") => {
+            let data_02 = helpers::read_file_to_string("src/day02/input.txt");
+            println!(
+                "Task 1: {}, Task 2: {}",
+                day02::task1(&data_02),
+                day02::task2(&data_02)
+            );
+        }
+        _ => panic!("No solution exists for this day"),
+    })
 }
