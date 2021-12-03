@@ -33,6 +33,13 @@ fn main() -> Result<(), String> {
                 day02::task2(&data_02)
             );
         }
+        Some("3") => {
+            let data_03 = helpers::read_file_to_string("src/day03/input.txt");
+            println!(
+                "Task 1: {}",
+                day03::task2(&data_03)
+            );
+        }
         _ => panic!("No solution exists for this day"),
     })
 }
