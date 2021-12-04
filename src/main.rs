@@ -2,6 +2,8 @@ use clap::{App, Arg};
 
 mod day01;
 mod day02;
+mod day03;
+mod day04;
 mod helpers;
 
 fn main() -> Result<(), String> {
@@ -36,8 +38,17 @@ fn main() -> Result<(), String> {
         Some("3") => {
             let data_03 = helpers::read_file_to_string("src/day03/input.txt");
             println!(
-                "Task 1: {}",
+                "Task 1: {}, Task2: {}",
+                day03::task1(&data_03),
                 day03::task2(&data_03)
+            );
+        }
+        Some("4") => {
+            let data_04 = helpers::read_file_to_string("src/day04/input.txt");
+            println!(
+                "Task 1: {}, Task2: {}",
+                day04::task1(&data_04),
+                day04::task2(&data_04)
             );
         }
         _ => panic!("No solution exists for this day"),
