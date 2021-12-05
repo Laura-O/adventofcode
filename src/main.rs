@@ -56,8 +56,8 @@ fn main() -> Result<(), String> {
             let data_05 = helpers::read_file_to_string("src/day05/input.txt");
             println!(
                 "Task 1: {}, Task2: {}",
-                day05::d05_task1(&data_05),
-                day05::d05_task2(&data_05)
+                day05::d05_task1(&data_05, false),
+                day05::d05_task1(&data_05, true)
             );
         }
         _ => panic!("No solution exists for this day"),

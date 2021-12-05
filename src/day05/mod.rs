@@ -7,7 +7,7 @@ struct Coordinate {
     y: u16,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 struct Line {
     c1: Coordinate,
     c2: Coordinate,
@@ -23,7 +23,7 @@ impl Line {
     }
 }
 
-pub fn d05_task1(data: &Vec<String>) -> String {
+pub fn d05_task1(data: &Vec<String>, add_diagonals: bool) -> String {
     let mut lines: Vec<Line> = vec![];
 
     for entry in data {
@@ -49,19 +49,19 @@ pub fn d05_task1(data: &Vec<String>) -> String {
     }
 
     let mut vents: HashMap<Coordinate, u16> = HashMap::new();
-    let all_positions: Vec<Coordinate> = calculate_all_lines(lines);
+    let all_positions: Vec<Coordinate> = calculate_all_lines(lines, add_diagonals);
 
     for position in all_positions {
         *vents.entry(position).or_insert(0) += 1;
     }
 
     vents.retain(|_, count| count > &mut 1);
-    println!("{:?}", vents);
+    println!("All valid vents: {:?}", vents);
 
     vents.len().to_string()
 }
 
-fn calculate_all_lines(lines: Vec<Line>) -> Vec<Coordinate> {
+fn calculate_all_lines(lines: Vec<Line>, add_diagonals: bool) -> Vec<Coordinate> {
     let mut all_line_coordinates = vec![];
 
     for line in lines {
@@ -73,11 +73,25 @@ fn calculate_all_lines(lines: Vec<Line>) -> Vec<Coordinate> {
             for y in min(line.c1.y, line.c2.y)..max(line.c1.y, line.c2.y) + 1 {
                 all_line_coordinates.push(Coordinate { x: line.c1.x, y });
             }
+        // No need to check if a line is vertical as the input is defined to be either horizontal, vertical or diagonal.
+        } else if add_diagonals {
+            let (start, end) = if line.c1.x < line.c2.x {
+                (line.c1, line.c2)
+            } else {
+                (line.c2, line.c1)
+            };
+
+            let mut current_y = start.y;
+            for x in start.x..end.x + 1 {
+                all_line_coordinates.push(Coordinate { x, y: current_y });
+
+                if current_y < end.y {
+                    current_y += 1
+                } else if current_y > 0 {
+                    current_y -= 1
+                }
+            }
         }
     }
     all_line_coordinates
-}
-
-pub fn d05_task2(data: &Vec<String>) -> String {
-    "".to_string()
 }
