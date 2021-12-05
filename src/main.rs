@@ -4,6 +4,7 @@ mod day01;
 mod day02;
 mod day03;
 mod day04;
+mod day05;
 mod helpers;
 
 fn main() -> Result<(), String> {
@@ -49,6 +50,14 @@ fn main() -> Result<(), String> {
                 "Task 1: {}, Task2: {}",
                 day04::task1(&data_04),
                 day04::task2(&data_04)
+            );
+        }
+        Some("5") => {
+            let data_05 = helpers::read_file_to_string("src/day05/input.txt");
+            println!(
+                "Task 1: {}, Task2: {}",
+                day05::d05_task1(&data_05),
+                day05::d05_task2(&data_05)
             );
         }
         _ => panic!("No solution exists for this day"),
