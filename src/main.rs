@@ -5,6 +5,8 @@ mod day02;
 mod day03;
 mod day04;
 mod day05;
+mod day06;
+mod day07;
 mod helpers;
 
 fn main() -> Result<(), String> {
@@ -58,6 +60,22 @@ fn main() -> Result<(), String> {
                 "Task 1: {}, Task2: {}",
                 day05::d05_task1(&data_05, false),
                 day05::d05_task1(&data_05, true)
+            );
+        }
+        Some("6") => {
+            let data_06 = helpers::read_file_to_string("src/day06/input.txt");
+            println!(
+                "Task 1: {}, Task2: {}",
+                day06::d06_task(&data_06, 80),
+                day06::d06_task(&data_06, 256)
+            );
+        }
+        Some("7") => {
+            let data_07 = helpers::read_file_to_string("src/day07/input.txt");
+            println!(
+                "Task 1: {}, Task2: {}",
+                day07::d07(&data_07, false),
+                day07::d07(&data_07, true)
             );
         }
         _ => panic!("No solution exists for this day"),
