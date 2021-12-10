@@ -8,6 +8,9 @@ mod day05;
 mod day06;
 mod day07;
 mod day08;
+mod day09;
+mod day10;
+mod day11;
 mod helpers;
 
 fn main() -> Result<(), String> {
@@ -78,14 +81,38 @@ fn main() -> Result<(), String> {
                 day07::d07(&data_07, false),
                 day07::d07(&data_07, true)
             );
-        },
+        }
         Some("8") => {
             let data_08 = helpers::read_file_to_string("src/day08/input.txt");
             println!(
                 "Task 1: {}, Task2: {}",
-                day08::d08(&data_08, false), day08::d08(&data_08, true)
+                day08::d08(&data_08, false),
+                day08::d08(&data_08, true)
             );
-            // extra::main();
+        }
+        Some("9") => {
+            let data_09 = helpers::read_file_to_string("src/day09/input.txt");
+            println!(
+                "Task 1: {}, Task2: {}",
+                day09::d09(&data_09, false),
+                day09::d09(&data_09, true)
+            );
+        }
+        Some("10") => {
+            let data_10 = helpers::read_file_to_string("src/day10/input.txt");
+            println!(
+                "Task 1: {}, Task2: {}",
+                day10::d10(&data_10, false),
+                day10::d10(&data_10, true)
+            );
+        }
+        Some("11") => {
+            let data_11 = helpers::read_file_to_string("src/day11/input.txt");
+            println!(
+                "Task 1: {}, Task2: {}",
+                day11::d11(&data_11, false),
+                day11::d11(&data_11, true)
+            );
         }
         _ => panic!("No solution exists for this day"),
     })
