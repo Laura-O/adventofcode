@@ -12,6 +12,9 @@ mod day09;
 mod day10;
 mod day11;
 mod day12;
+mod day13;
+mod day14;
+mod day15;
 mod helpers;
 
 fn main() -> Result<(), String> {
@@ -129,6 +132,22 @@ fn main() -> Result<(), String> {
                 "Task 1: {}, Task2: {}",
                 day13::main(&data_13, false),
                 day13::main(&data_13, true)
+            );
+        }
+        Some("14") => {
+            let data_14 = helpers::read_file_to_string("src/day14/input.txt");
+            println!(
+                "Task 1: {}, Task2: {}",
+                day14::main(&data_14, false),
+                day14::main(&data_14, true)
+            );
+        }
+        Some("15") => {
+            let data_15 = helpers::read_file_to_string("src/day15/input.txt");
+            println!(
+                "Task 1: {}, Task2: {}",
+                day15::main(&data_15, false),
+                day15::main(&data_15, true)
             );
         }
         _ => panic!("No solution exists for this day"),
